@@ -10,6 +10,10 @@ setup(
     author='Tobias Bengfort',
     author_email='tobias.bengfort@posteo.de',
     packages=['dirtywords'],
+    extras_require={
+        'curses_core': ['curses'],
+        'pygame_core': ['pygame'],
+    },
     license='GPLv2+',
     classifiers=[
         'Development Status :: 1 - Planning',
