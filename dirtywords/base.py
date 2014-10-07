@@ -11,6 +11,9 @@ A new core implementation should be derived from :py:class:`Screen` and
 must provide implementations for all low-level functions.  It may also provide
 optimised implementations of high-level functionality.
 
+When importing directly from :py:mod:`dirtywords`, the "best" available
+implementation is chosen.
+
 """
 
 
