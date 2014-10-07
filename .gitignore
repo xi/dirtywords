@@ -1,0 +1,11 @@
+*~
+*.swp
+*.swo
+*.pyc
+.env
+.tox
+.cover
+.coverage
+*.egg-info
+*-orig
+docs/build
