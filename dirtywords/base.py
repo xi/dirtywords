@@ -48,7 +48,6 @@ class AttrString(unicode):
     """
 
     def __new__(cls, s, **kwargs):
-        # TODO: there should be a TypeError on invalid kwarg
         self = super(AttrString, cls).__new__(cls, s)
         self.set_attrs(s, **kwargs)
         return self
@@ -61,6 +60,10 @@ class AttrString(unicode):
             'fg_color': (255, 255, 255),
             'bg_color': (0, 0, 0),
         }
+
+        for attr in kwargs:
+            if attr not in defaults:
+                raise TypeError('No such attribute: %s' % attr)
 
         for attr in defaults.iterkeys():
             if attr in kwargs:
