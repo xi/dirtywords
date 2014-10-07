@@ -154,7 +154,7 @@ class Screen(Core):
     def fill(self, ch):
         """Fill whole screen with character."""
         for y in range(self.height):
-            self.row(y, ch)
+            self.fill_row(y, ch)
 
     def clear(self):
         """Clear whole screen."""
