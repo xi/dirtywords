@@ -57,7 +57,7 @@ class Screen(base.Screen):
     def putstr(self, y, x, s):
         for i, ch in enumerate(s):
             ch = base.AttrString(ch)
-            if ch.bold:
+            if ch.strong:
                 self.curses_window.attron(curses.A_BOLD)
             if ch.underline:
                 self.curses_window.attron(curses.A_UNDERLINE)

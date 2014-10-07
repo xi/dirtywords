@@ -31,7 +31,7 @@ class Player(object):
         elif self.direction == 'left':
             self.x -= 1
 
-        s = AttrString('X', bold=True, fg_color=(0, 0, 255))
+        s = AttrString('X', strong=True, fg_color=(0, 0, 255))
         self.win.putstr(self.y, self.x, s)
         self.win.refresh()
         sleep(0.05)

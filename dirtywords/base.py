@@ -11,8 +11,8 @@ class AttrString(unicode):
 
     def set_attrs(self, reference='', **kwargs):
         defaults = {
-            'bold': False,
-            'italic': False,
+            'strong': False,
+            'emph': False,
             'underline': False,
             'fg_color': (255, 255, 255),
             'bg_color': (0, 0, 0),
@@ -30,8 +30,8 @@ class AttrString(unicode):
 
     def get_attrs(self):
         return {
-            'bold': self.bold,
-            'italic': self.italic,
+            'strong': self.strong,
+            'emph': self.emph,
             'underline': self.underline,
             'fg_color': self.fg_color,
             'bg_color': self.bg_color,

@@ -40,8 +40,8 @@ class Screen(base.Screen):
 
     def _render_ch(self, ch):
         ch = base.AttrString(ch)
-        self.font.set_bold(ch.bold)
-        self.font.set_italic(ch.italic)
+        self.font.set_bold(ch.strong)
+        self.font.set_italic(ch.emph)
         self.font.set_underline(ch.underline)
         return self.font.render(ch, False, ch.fg_color, ch.bg_color)
 
