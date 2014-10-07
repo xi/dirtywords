@@ -9,3 +9,4 @@ except ImportError:
         from stupid_core import Screen
 
 from base import Window
+from base import AttrString
