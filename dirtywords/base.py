@@ -69,13 +69,37 @@ class Core(object):
         self.height = height
         self.width = width
         self.data = [[' ' for xx in range(width)] for yy in range(height)]
-        self._pressed_keys = {}
 
     def getch(self, blocking=True):
         """Get a character from ``stdin``."""
         # TODO: There should be some kind of abstraction for modifiers and
         # more general any non-ascii keys.
         raise NotImplementedError
+
+    def putstr(self, y, x, s):
+        """Write string to position."""
+        # TODO: handle newlines
+        for i, ch in enumerate(s):
+            try:
+                self.data[y][x + i] = ch
+            except IndexError:
+                pass
+
+    def refresh(self):
+        """Print the current state to the screen."""
+        raise NotImplementedError
+
+    def cleanup(self):
+        """Deinitialize screen."""
+        pass
+
+
+class Screen(Core):
+    """Additional utility functions for :py:class:`Core`."""
+
+    def __init__(self, height, width):
+        super(Screen, self).__init__(height, width)
+        self._pressed_keys = {}
 
     def get_key_events(self):
         """Get iterator of keyup/-down events.
@@ -151,27 +175,6 @@ class Core(object):
                         'phase': phase,
                     }
                 self._pressed_keys[ch] = (now, 2)
-
-    def putstr(self, y, x, s):
-        """Write string to position."""
-        # TODO: handle newlines
-        for i, ch in enumerate(s):
-            try:
-                self.data[y][x + i] = ch
-            except IndexError:
-                pass
-
-    def refresh(self):
-        """Print the current state to the screen."""
-        raise NotImplementedError
-
-    def cleanup(self):
-        """Deinitialize screen."""
-        pass
-
-
-class Screen(Core):
-    """Additional utility functions for :py:class:`Core`."""
 
     def delch(self, y, x):
         """Delete character at position."""
