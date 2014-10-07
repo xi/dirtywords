@@ -54,6 +54,8 @@ class Core(object):
         self._pressed_keys = {}
 
     def getch(self, blocking=True):
+        # TODO: There should be some kind of abstraction for modifiers and
+        # more general any non-ascii keys.
         raise NotImplementedError
 
     def get_key_events(self):
@@ -120,6 +122,7 @@ class Core(object):
 
     def putstr(self, y, x, s):
         """Write string to position."""
+        # TODO: handle newlines
         for i, ch in enumerate(s):
             try:
                 self.data[y][x + i] = ch
