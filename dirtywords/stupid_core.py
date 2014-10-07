@@ -1,3 +1,12 @@
+"""Minimal dirtywords implementation.
+
+Simply prints to ``stdout`` with some lines space at the top.
+
+The :py:meth:`Screen.getch` implementation should be more or less
+cross-platform.
+
+"""
+
 import base
 
 
