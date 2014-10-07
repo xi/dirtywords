@@ -15,6 +15,25 @@ There are currently three implementations of the core: One based on `curses`_,
 another one based on `pygame`_, and a minimal implementation without any
 dependencies outside of the standard library.
 
+Example
+-------
+
+::
+
+    import sys
+    from dirtywords import Screen, Window, AttrString
+
+    text = AttrString(u'Hello World!', fg_color=(0, 255, 0))
+    screen = Screen(3, len(text) + 4)
+    screen.border()
+    screen.putstr(1, 2, text)
+    screen.refresh()
+
+    while True:
+        ch = screen.getch()
+        if ch == ord('q'):
+            screen.cleanup()
+            sys.exit()
 
 .. _curses: https://docs.python.org/2/library/curses.html
 .. _pygame: http://pygame.org
