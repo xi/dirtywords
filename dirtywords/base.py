@@ -45,7 +45,7 @@ class AttrString(unicode):
         return AttrString(ch, **self.get_attrs())
 
 
-class BaseScreen(object):
+class Core(object):
     def __init__(self, height, width):
         """Initialize screen."""
         self.height = height
@@ -135,8 +135,8 @@ class BaseScreen(object):
         pass
 
 
-class Screen(BaseScreen):
-    """Additional utility functions for :py:class:`BaseScreen`."""
+class Screen(Core):
+    """Additional utility functions for :py:class:`Core`."""
 
     def delch(self, y, x):
         """Delete character at position."""
