@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name='dirtywords',
     version='0.0.0',
-    description="protable text interface framework",
+    description="portable text interface framework",
     long_description=open('README.rst').read(),
     url='https://github.com/xi/dirtywords',
     author='Tobias Bengfort',

@@ -1,4 +1,4 @@
-dirtywords - protable text interface framework
+dirtywords - portable text interface framework
 
 So I wanted to create a text interface and ended up creating a framework.  "Why
 didn't you just stick with curses?" I hear you ask.  For two good reasons:
