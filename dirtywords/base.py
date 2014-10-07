@@ -2,7 +2,24 @@ from time import time
 
 
 class AttrString(unicode):
-    """Unicode string with additional attributes."""
+    """Unicode string with additional attributes.
+
+    emph
+        (bool) emphasis
+    strong
+        (bool) strong emphasis
+    underline
+        (bool) underline text
+    fg_color
+        (r, g, b) foreground color
+    bg_color
+        (r, g, b) background color
+
+    Example::
+
+        AttrString(u'hello world!', strong=True, fg_color=(0, 255, 0))
+
+    """
 
     def __new__(cls, s, **kwargs):
         self = super(AttrString, cls).__new__(cls, s)
@@ -46,20 +63,35 @@ class AttrString(unicode):
 
 
 class Core(object):
+    """Minimal core on which everything else is based."""
+
     def __init__(self, height, width):
-        """Initialize screen."""
         self.height = height
         self.width = width
         self.data = [[' ' for xx in range(width)] for yy in range(height)]
         self._pressed_keys = {}
 
     def getch(self, blocking=True):
+        """Get a character from ``stdin``."""
         # TODO: There should be some kind of abstraction for modifiers and
         # more general any non-ascii keys.
         raise NotImplementedError
 
     def get_key_events(self):
-        """Get iterator of keyup/down events."""
+        """Get iterator of keyup/-down events.
+
+        The events are dictionaries of the form::
+
+            {
+                'type': 'keyup',
+                'key': 32,
+            }
+
+        The default implementation tries to emulate these using
+        :py:meth:`getch`.  It includes a short delay so that only one keydown
+        and one keyup event is triggered on repeated key presses.
+
+        """
 
         # 0.  The key is not pressed. Nothing happens.
         # 1.  The key is initially pressed.
