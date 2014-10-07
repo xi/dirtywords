@@ -1,0 +1,20 @@
+dirtywords - protable text interface framework
+
+So I wanted to create a text interface and ended up creating a framework.  "Why
+didn't you just stick with curses?" I hear you ask.  For two good reasons:
+First, curses is not very portable.  It does not run on windows.  And it can
+not be installed with pip.  The second reason of course is that I had fun with
+this project.
+
+So what is this if not curses?  You can think of it as a wrapper around curses
+with a different (though similar) API.  But the interesting thing about it is
+that it implements a tiny set of functions with curses and builds the rest from
+there.  And this tiny core can easily be implemented with other frameworks.
+
+There are currently three implementations of the core: One based on `curses`_,
+another one based on `pygame`_, and a minimal implementation without any
+dependencies outside of the standard library.
+
+
+.. _curses: https://docs.python.org/2/library/curses.html
+.. _pygame: http://pygame.org
