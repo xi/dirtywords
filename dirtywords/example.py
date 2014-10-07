@@ -2,12 +2,12 @@ import sys
 from time import sleep
 
 try:
-    from curses_dirtywords import Screen
+    from curses_core import Screen
 except ImportError:
     try:
-        from pygame_dirtywords import Screen
+        from pygame_core import Screen
     except ImportError:
-        from stupid_dirtywords import Screen
+        from stupid_core import Screen
 
 from base import AttrString
 
