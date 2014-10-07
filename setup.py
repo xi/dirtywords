@@ -18,7 +18,7 @@ setup(
     classifiers=[
         'Development Status :: 1 - Planning',
         'Environment :: Console :: Curses',
-        'Intended Audience :: Developers'
+        'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'License :: OSI Approved :: GNU General Public License v2 or later '
