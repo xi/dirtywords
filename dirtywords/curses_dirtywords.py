@@ -4,7 +4,6 @@ except ImportError:
     import curses
 
 import base
-from attr_string import AttrString
 
 
 class Screen(base.Screen):
@@ -57,7 +56,7 @@ class Screen(base.Screen):
 
     def putstr(self, y, x, s):
         for i, ch in enumerate(s):
-            ch = AttrString(ch)
+            ch = base.AttrString(ch)
             if ch.bold:
                 self.curses_window.attron(curses.A_BOLD)
             if ch.underline:

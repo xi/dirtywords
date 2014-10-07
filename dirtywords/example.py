@@ -9,7 +9,7 @@ except ImportError:
     except ImportError:
         from stupid_dirtywords import Screen
 
-from attr_string import AttrString
+from base import AttrString
 
 
 class Player(object):

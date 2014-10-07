@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import KEYDOWN, KEYUP
 
 import base
-from attr_string import AttrString
 
 
 class Screen(base.Screen):
@@ -40,7 +39,7 @@ class Screen(base.Screen):
                 }
 
     def _render_ch(self, ch):
-        ch = AttrString(ch)
+        ch = base.AttrString(ch)
         self.font.set_bold(ch.bold)
         self.font.set_italic(ch.italic)
         self.font.set_underline(ch.underline)
