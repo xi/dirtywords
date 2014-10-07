@@ -21,7 +21,7 @@ Example
 ::
 
     import sys
-    from dirtywords import Screen, Window, AttrString
+    from dirtywords import Screen, AttrString
 
     text = AttrString(u'Hello World!', fg_color=(0, 255, 0))
     screen = Screen(3, len(text) + 4)
