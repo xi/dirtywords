@@ -1,27 +1,51 @@
+"""
+dirtywords is based on multiple implementations of the :py:class:`Core` class.
+On top of that, the :py:class:`Screen`-API is implemented. This is what you
+work with most of the time.
+
+The screen API is accompanied by :py:class:`Window` (a screen implementation
+that uses an existing screen object rather than an external framework) and
+:py:class:`AttrString` for easy string formatting.
+
+A new core implementation should be derived from :py:class:`Screen` and
+must provide implementations for all low-level functions.  It may also provide
+optimised implementations of high-level functionality.
+
+"""
+
+
 from time import time
 
 
 class AttrString(unicode):
     """Unicode string with additional attributes.
 
-    emph
-        (bool) emphasis
-    strong
-        (bool) strong emphasis
-    underline
-        (bool) underline text
-    fg_color
-        (r, g, b) foreground color
-    bg_color
-        (r, g, b) background color
+    Rather than specifying formatting information with :py:meth:`Core.putstr`,
+    it is saved with the string object itself. This way the formatting can be
+    used for further computation before printing it to the screen.
+
+    :py:class:`AttrString` is derived from :py:class:`unicode`. You need to
+    take care of proberly decoding byte-strings yourself.
+
+    ========= ========= ================
+    name      type      description
+    ========= ========= ================
+    emph      bool      emphasis
+    strong    bool      strong emphasis
+    underline bool      underline text
+    fg_color  (r, g, b) foreground color
+    bg_color  (r, g, b) background color
+    ========= ========= ================
 
     Example::
 
-        AttrString(u'hello world!', strong=True, fg_color=(0, 255, 0))
+        AttrString(u'Hello World!', strong=True, fg_color=(0, 255, 0))
+
 
     """
 
     def __new__(cls, s, **kwargs):
+        # TODO: there should be a TypeError on invalid kwarg
         self = super(AttrString, cls).__new__(cls, s)
         self.set_attrs(s, **kwargs)
         return self
@@ -94,7 +118,7 @@ class Core(object):
 
 
 class Screen(Core):
-    """Additional utility functions for :py:class:`Core`."""
+    """Additional text interface utilities build on top of :py:class:`Core`."""
 
     def __init__(self, height, width):
         super(Screen, self).__init__(height, width)
@@ -218,6 +242,9 @@ class Window(Screen):
         self.parent = parent
         self.y = y
         self.x = x
+
+    def getch(self, blocking=True):
+        return self.parent.getch(blocking=blocking)
 
     def get_key_events(self):
         return self.parent.get_key_events()
