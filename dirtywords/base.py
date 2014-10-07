@@ -78,7 +78,6 @@ class Core(object):
 
     def putstr(self, y, x, s):
         """Write string to position."""
-        # TODO: handle newlines
         for i, ch in enumerate(s):
             try:
                 self.data[y][x + i] = ch
