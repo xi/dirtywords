@@ -46,4 +46,4 @@ class Screen(base.Screen):
     def refresh(self):
         spacing = '\n' * self.height * 2
         s = '\n'.join([''.join(row) for row in self.data])
-        print(spacing + s)
+        print(spacing + s.encode('utf8'))

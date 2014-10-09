@@ -65,7 +65,7 @@ class Screen(base.Screen):
             self.curses_window.attron(curses.color_pair(color))
 
             try:
-                self.curses_window.addstr(y, x + i, ch)
+                self.curses_window.addstr(y, x + i, ch.encode('utf8'))
             except:
                 pass
 
