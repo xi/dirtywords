@@ -8,6 +8,7 @@ cross-platform.
 """
 
 import base
+from constants import KEYS
 
 
 class Screen(base.Screen):
@@ -16,7 +17,7 @@ class Screen(base.Screen):
 
         self._pressed_keys = {}
 
-    def getch(self, blocking=True):
+    def _getch(self, blocking=True):
         # http://code.activestate.com/recipes/134892/
 
         try:  # windows
@@ -42,6 +43,50 @@ class Screen(base.Screen):
                     return ord(sys.stdin.read(1))
             finally:
                 termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+
+    def getch(self, blocking=True):
+        # Convert ANSI escape sequences to key constants
+        # This is implemented as a wrapper around :py:meth:`_getch` because
+        # it needs to get a variable number of bytes from stdin.
+        l = [self._getch()]
+
+        if l == [27]:
+            # TODO: single ESC is valid, so this should not block
+            l.append(self._getch())
+        elif l == [155]:
+            l = [27, 91]
+
+        if l[0] == 27:
+            if l[1] == 91:
+                l.append(self._getch())
+                while l[-1] not in range(64, 127):
+                    l.append(self._getch())
+            elif l[-1] in range(64, 96):
+                pass
+            else:
+                # invalid?
+                pass
+
+        if l == [27, 27]:
+            return 27
+        if l == [27, 91, 68]:
+            return KEYS['Left']
+        elif l == [27, 91, 67]:
+            return KEYS['Right']
+        elif l == [27, 91, 66]:
+            return KEYS['Down']
+        elif l == [27, 91, 65]:
+            return KEYS['Up']
+        elif l == [27, 91, 54, 126]:
+            return KEYS['PageDown']
+        elif l == [27, 91, 53, 126]:
+            return KEYS['PageUp']
+        elif l == [27, 91, 51, 126]:
+            return KEYS['Delete']
+        elif l == [27, 91, 50, 126]:
+            return KEYS['Insert']
+        elif len(l) == 1:
+            return l[0]
 
     def refresh(self):
         spacing = '\n' * self.height * 2
