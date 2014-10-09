@@ -18,6 +18,9 @@ implementation is chosen.
 
 
 from time import time
+import string
+
+from constants import KEYS
 
 
 class AttrString(unicode):
@@ -204,6 +207,28 @@ class Screen(Core):
                         'phase': phase,
                     }
                 self._pressed_keys[ch] = (now, 2)
+
+    def getkey(self, blocking=True):
+        """Wrapper around :py:meth:`getch` that returns unicode if possible."""
+        ch = self.getch(blocking=blocking)
+
+        if ch is not None:
+            if ch in KEYS.values():
+                return ch
+
+            elif 127 < ch < 256:  # interpret as utf8
+                nbytes = bin(ch)[3:].find('0')
+                l = [ch]
+                for i in range(nbytes):
+                    l.append(self.getch())
+                s = ''.join([chr(c) for c in l])
+                return s.decode('utf8')
+
+            elif ch < 256 and chr(ch) in string.printable:
+                return unicode(chr(ch))
+
+        if blocking:
+            return self.getkey(blocking=blocking)
 
     def delch(self, y, x):
         """Delete character at position."""
