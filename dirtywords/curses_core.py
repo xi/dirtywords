@@ -4,6 +4,9 @@ except ImportError:
     import curses
 
 import base
+import locale
+
+from constants import KEYS
 
 
 class Screen(base.Screen):
@@ -25,6 +28,31 @@ class Screen(base.Screen):
         self.curses_window = curses.newwin(height, width, 0, 0)
         self.curses_window.keypad(1)
 
+    def _convert_ch(self, ch):
+        mapping = {
+            'Pause': curses.KEY_BREAK,
+            'Down': curses.KEY_DOWN,
+            'Up': curses.KEY_UP,
+            'Left': curses.KEY_LEFT,
+            'Right': curses.KEY_RIGHT,
+            'Home': curses.KEY_HOME,
+            'Backspace': curses.KEY_BACKSPACE,
+            'Delete': curses.KEY_DC,
+            'Insert': curses.KEY_IC,
+            'PageDown': curses.KEY_NPAGE,
+            'PageUp': curses.KEY_PPAGE,
+            'Return': 10,
+            'Print': curses.KEY_PRINT,
+            'End': curses.KEY_END,
+        }
+
+        for key, curses_ch in mapping.iteritems():
+            if ch == curses_ch:
+                return KEYS[key]
+
+        if 0 <= ch < 256:
+            return ch
+
     def getch(self, blocking=True):
         if blocking:
             self.curses_window.timeout(-1)
@@ -32,8 +60,7 @@ class Screen(base.Screen):
             self.curses_window.timeout(100)
 
         ch = self.curses_window.getch()
-        if ch != -1:
-            return ch
+        return self._convert_ch(ch)
 
     def _get_color(self, color):
         r, g, b = color
