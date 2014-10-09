@@ -1,7 +1,10 @@
+import string
+
 import pygame
 from pygame.locals import KEYDOWN, KEYUP
 
 import base
+from constants import KEYS
 
 
 class Screen(base.Screen):
@@ -17,24 +20,39 @@ class Screen(base.Screen):
         self.pygame_screen = pygame.display.set_mode(
             (self.fontwidth * width, self.fontheight * height))
 
+    def _convert_ch(self, ch):
+        # key constants
+        for key, value in KEYS.iteritems():
+            if ch == getattr(pygame, 'K_' + key.upper()):
+                return value
+
+        if 0 <= ch < 256:
+            if chr(ch) in string.letters:
+                # capital letters on shift
+                if pygame.key.get_mods() & pygame.KMOD_SHIFT:
+                    ch ^= 32
+            return ch
+
     def getch(self, blocking=True):
         while blocking or pygame.event.peek(KEYDOWN):
             event = pygame.event.wait()
             if event.type == KEYDOWN:
-                return event.key
+                ch = self._convert_ch(event.key)
+                if ch is not None:
+                    return ch
 
     def get_key_events(self):
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 yield {
                     'type': 'keydown',
-                    'key': event.key,
+                    'key': self._convert_ch(event.key),
                     'modifier': event.mod,
                 }
             elif event.type == KEYUP:
                 yield {
                     'type': 'keyup',
-                    'key': event.key,
+                    'key': self._convert_ch(event.key),
                     'modifier': event.mod,
                 }
 
