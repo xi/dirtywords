@@ -13,13 +13,17 @@ class Screen(base.Screen):
         curses.initscr()
         curses.start_color()
         curses.noecho()
+        curses.meta(1)
+        curses.cbreak()
         curses.curs_set(0)  # hide cursor
+        locale.setlocale(locale.LC_ALL, '')
 
         # use black background everywhere
         for i in range(1, 8):
             curses.init_pair(i, i, 0)
 
         self.curses_window = curses.newwin(height, width, 0, 0)
+        self.curses_window.keypad(1)
 
     def getch(self, blocking=True):
         if blocking:
