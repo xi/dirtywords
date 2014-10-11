@@ -61,6 +61,8 @@ class Screen(base.Screen):
                 l.append(self._getch())
                 while l[-1] not in range(64, 127):
                     l.append(self._getch())
+            elif l[1] == 79:
+                l.append(self._getch())
             elif l[-1] in range(64, 96):
                 pass
             else:
@@ -85,8 +87,16 @@ class Screen(base.Screen):
             return KEYS['Delete']
         elif l == [27, 91, 50, 126]:
             return KEYS['Insert']
+        elif l == [127]:
+            return KEYS['Backspace']
+        elif l == [13]:
+            return KEYS['Return']
         elif len(l) == 1:
             return l[0]
+        elif l == [27, 79, 70]:
+            return KEYS['End']
+        elif l == [27, 79, 72]:
+            return KEYS['Home']
 
     def refresh(self):
         spacing = '\n' * self.height * 2
