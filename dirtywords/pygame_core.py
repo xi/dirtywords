@@ -15,7 +15,8 @@ class Screen(base.Screen):
         self.clock = pygame.time.Clock()
 
         self.font = pygame.font.SysFont('monospace', 12)
-        self.fontwidth, self.fontheight = self.font.size(' ')
+        reference_char = 'M'  # some arbitrary char to measure the fontsize
+        self.fontwidth, self.fontheight = self.font.size(reference_char)
 
         self.pygame_screen = pygame.display.set_mode(
             (self.fontwidth * width, self.fontheight * height))
@@ -61,14 +62,22 @@ class Screen(base.Screen):
         self.font.set_bold(ch.strong)
         self.font.set_italic(ch.emph)
         self.font.set_underline(ch.underline)
-        return self.font.render(ch, False, ch.fg_color, ch.bg_color)
+
+        s = self.font.render(ch, False, ch.fg_color, ch.bg_color)
+
+        # make sure the returned surface has the right dimensions
+        surface = pygame.Surface((self.fontwidth, self.fontheight))
+        surface.fill(ch.bg_color)
+        surface.blit(s, (0, 0))
+        return surface
 
     def putstr(self, y, x, s):
         super(Screen, self).putstr(y, x, s)
         for i, ch in enumerate(s):
             self.pygame_screen.blit(
                 self._render_ch(ch),
-                ((x + i) * self.fontwidth, y * self.fontheight))
+                ((x + i) * self.fontwidth, y * self.fontheight),
+                area=(0, 0, self.fontwidth, self.fontheight))
 
     def refresh(self):
         self.clock.tick()
