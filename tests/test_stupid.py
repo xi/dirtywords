@@ -5,7 +5,7 @@ from .shared import PyKeyboard
 from . import shared_core
 
 try:
-    from dirtywords.stupid_core import Screen
+    from dirtywords.stupid import Screen
     stupid = True
 except ImportError:
     stupid = None

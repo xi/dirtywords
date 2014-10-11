@@ -5,8 +5,8 @@ from .shared import PyKeyboard
 from . import shared_core
 
 try:
-    from dirtywords.curses_core import Screen
-    from dirtywords.curses_core import curses
+    from dirtywords.curses import Screen
+    from dirtywords.curses import curses
 except ImportError:
     curses = None
 

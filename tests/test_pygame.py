@@ -5,8 +5,8 @@ from .shared import PyKeyboard
 from . import shared_core
 
 try:
-    from dirtywords.pygame_core import Screen
-    from dirtywords.pygame_core import pygame
+    from dirtywords.pygame import Screen
+    from dirtywords.pygame import pygame
 except ImportError:
     pygame = None
 
