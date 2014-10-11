@@ -1,15 +1,7 @@
 import sys
 from time import sleep
 
-try:
-    from curses_core import Screen
-except ImportError:
-    try:
-        from pygame_core import Screen
-    except ImportError:
-        from stupid_core import Screen
-
-from base import AttrString
+from dirtywords import Screen, AttrString
 
 
 class Player(object):
