@@ -16,11 +16,12 @@ implementation is chosen.
 
 """
 
+from __future__ import absolute_import
 
 from time import time
 import string
 
-from constants import KEYS
+from .constants import KEYS
 
 
 class AttrString(unicode):

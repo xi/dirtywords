@@ -1,10 +1,12 @@
+from __future__ import absolute_import
+
 import string
 
 import pygame
 from pygame.locals import KEYDOWN, KEYUP
 
-import base
-from constants import KEYS
+from . import base
+from .constants import KEYS
 
 
 class Screen(base.Screen):

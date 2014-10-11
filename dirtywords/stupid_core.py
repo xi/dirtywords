@@ -7,8 +7,10 @@ cross-platform.
 
 """
 
-import base
-from constants import KEYS
+from __future__ import absolute_import
+
+from . import base
+from .constants import KEYS
 
 
 class Screen(base.Screen):

@@ -1,8 +1,10 @@
+from __future__ import absolute_import
+
 import threading
 from time import sleep
 
-from shared import unittest
-from shared import PyKeyboard
+from .shared import unittest
+from .shared import PyKeyboard
 
 from dirtywords.constants import KEYS
 

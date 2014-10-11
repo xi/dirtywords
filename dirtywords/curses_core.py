@@ -1,12 +1,14 @@
+from __future__ import absolute_import
+
+import locale
+
 try:
     from ncurses import curses
 except ImportError:
     import curses
 
-import base
-import locale
-
-from constants import KEYS
+from . import base
+from .constants import KEYS
 
 
 class Screen(base.Screen):

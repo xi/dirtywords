@@ -1,6 +1,8 @@
-from shared import unittest
-from shared import PyKeyboard
-import shared_core
+from __future__ import absolute_import
+
+from .shared import unittest
+from .shared import PyKeyboard
+from . import shared_core
 
 try:
     from dirtywords.stupid_core import Screen
