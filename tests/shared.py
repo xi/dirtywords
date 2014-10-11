@@ -1,4 +1,11 @@
+# flake8: noqa
+
 try:
-    import unittest2 as unittest  # flake8: noqa
+    import unittest2 as unittest
 except ImportError:
-    import unittest  # flake8: noqa
+    import unittest
+
+try:
+    from pykeyboard import PyKeyboard
+except ImportError:
+    PyKeyboard = None
