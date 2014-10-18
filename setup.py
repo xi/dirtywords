@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='dirtywords',
-    version='0.0.1',
+    version='0.0.2',
     description="portable text interface framework",
     long_description=open('README.rst').read(),
     url='https://github.com/xi/dirtywords',
