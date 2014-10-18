@@ -50,7 +50,7 @@ class Screen(base.Screen):
         # Convert ANSI escape sequences to key constants
         # This is implemented as a wrapper around :py:meth:`_getch` because
         # it needs to get a variable number of bytes from stdin.
-        l = [self._getch()]
+        l = [self._getch(blocking=blocking)]
 
         if l == [27]:
             # TODO: single ESC is valid, so this should not block
