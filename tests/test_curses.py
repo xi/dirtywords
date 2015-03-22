@@ -26,4 +26,4 @@ class TestCurses(shared_core.TestCore):
 
     def tearDown(self):
         self.scr.cleanup()
-        super(TestCurses, self).setUp()
+        super(TestCurses, self).tearDown()

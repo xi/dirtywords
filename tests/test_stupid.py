@@ -20,4 +20,4 @@ class TestStupid(shared_core.TestCore):
 
     def tearDown(self):
         self.scr.cleanup()
-        super(TestStupid, self).setUp()
+        super(TestStupid, self).tearDown()

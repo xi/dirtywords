@@ -20,7 +20,7 @@ class TestPygame(shared_core.TestCore):
 
     def tearDown(self):
         self.scr.cleanup()
-        super(TestPygame, self).setUp()
+        super(TestPygame, self).tearDown()
 
     @unittest.expectedFailure
     def test_getch_upper_ascii(self):
