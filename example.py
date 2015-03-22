@@ -2,6 +2,7 @@ import sys
 from time import sleep
 
 from dirtywords import Screen, AttrString
+from dirtywords.constants import KEYS
 
 
 class Player(object):
@@ -41,13 +42,13 @@ if __name__ == '__main__':
         while 1:
             for event in scr.get_key_events():
                 if event['type'] == 'keydown':
-                    if event['key'] == ord('h'):
+                    if event['key'] in [ord('h'), KEYS['Left']]:
                         player.direction = 'left'
-                    elif event['key'] == ord('j'):
+                    elif event['key'] in [ord('j'), KEYS['Down']]:
                         player.direction = 'down'
-                    elif event['key'] == ord('k'):
+                    elif event['key'] in [ord('k'), KEYS['Up']]:
                         player.direction = 'up'
-                    elif event['key'] == ord('l'):
+                    elif event['key'] in [ord('l'), KEYS['Right']]:
                         player.direction = 'right'
                     elif event['key'] == ord('q'):
                         scr.cleanup()
