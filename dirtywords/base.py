@@ -23,8 +23,13 @@ import string
 
 from .constants import KEYS
 
+try:
+    ustr = unicode
+except NameError:
+    ustr = str
 
-class AttrString(unicode):
+
+class AttrString(ustr):
     """Unicode string with additional attributes.
 
     Rather than specifying formatting information with :py:meth:`Core.putstr`,
@@ -92,7 +97,7 @@ class AttrString(unicode):
         return (self[i] for i in range(len(self)))
 
     def __getitem__(self, i):
-        ch = unicode.__getitem__(self, i)
+        ch = ustr.__getitem__(self, i)
         return AttrString(ch, **self.get_attrs())
 
 
@@ -226,7 +231,7 @@ class Screen(Core):
                 return s.decode('utf8')
 
             elif ch < 256 and chr(ch) in string.printable:
-                return unicode(chr(ch))
+                return ustr(chr(ch))
 
         if blocking:
             return self.getkey(blocking=blocking)
