@@ -35,5 +35,14 @@ Example
             screen.cleanup()
             sys.exit()
 
+Tests
+-----
+
+In order to run the tests you need to have ``python-xlib`` installed.  Then
+you only need to run the following command::
+
+    tox --sitepackages
+
+
 .. _curses: https://docs.python.org/2/library/curses.html
 .. _pygame: http://pygame.org
