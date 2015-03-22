@@ -66,26 +66,20 @@ class Screen(base.Screen):
 
     def _get_color(self, color):
         r, g, b = color
-        r = int(round(r / 255.0)) * 255
-        g = int(round(g / 255.0)) * 255
-        b = int(round(b / 255.0)) * 255
+        r = int(round(r / 255.0))
+        g = int(round(g / 255.0))
+        b = int(round(b / 255.0))
 
-        if (r, g, b) == (0, 0, 0):
-            return 0
-        elif (r, g, b) == (255, 0, 0):
-            return 1
-        elif (r, g, b) == (0, 255, 0):
-            return 2
-        elif (r, g, b) == (255, 255, 0):
-            return 3
-        elif (r, g, b) == (0, 0, 255):
-            return 4
-        elif (r, g, b) == (255, 0, 255):
-            return 5
-        elif (r, g, b) == (0, 255, 255):
-            return 6
-        elif (r, g, b) == (255, 255, 255):
-            return 7
+        return {
+            '000': 0,
+            '100': 1,
+            '010': 2,
+            '110': 3,
+            '001': 4,
+            '101': 5,
+            '011': 6,
+            '111': 7,
+        }.get('%i%i%i' % (r, g, b))
 
     def putstr(self, y, x, s):
         for i, ch in enumerate(s):

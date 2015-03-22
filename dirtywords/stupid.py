@@ -46,6 +46,28 @@ class Screen(base.Screen):
             finally:
                 termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
 
+    def _codes2key(self, l):
+        codes = {
+            '13': KEYS['Return'],
+            '127': KEYS['Backspace'],
+            '27, 27': 27,
+            '27, 79, 70': KEYS['End'],
+            '27, 79, 72': KEYS['Home'],
+            '27, 91, 50, 126': KEYS['Insert'],
+            '27, 91, 51, 126': KEYS['Delete'],
+            '27, 91, 53, 126': KEYS['PageUp'],
+            '27, 91, 54, 126': KEYS['PageDown'],
+            '27, 91, 65': KEYS['Up'],
+            '27, 91, 66': KEYS['Down'],
+            '27, 91, 67': KEYS['Right'],
+            '27, 91, 68': KEYS['Left'],
+        }
+        key = ', '.join([str(i) for i in l])
+        if key in codes:
+            return codes[key]
+        elif len(l) == 1:
+            return l[0]
+
     def getch(self, blocking=True):
         # Convert ANSI escape sequences to key constants
         # This is implemented as a wrapper around :py:meth:`_getch` because
@@ -71,34 +93,7 @@ class Screen(base.Screen):
                 # invalid?
                 pass
 
-        if l == [27, 27]:
-            return 27
-        if l == [27, 91, 68]:
-            return KEYS['Left']
-        elif l == [27, 91, 67]:
-            return KEYS['Right']
-        elif l == [27, 91, 66]:
-            return KEYS['Down']
-        elif l == [27, 91, 65]:
-            return KEYS['Up']
-        elif l == [27, 91, 54, 126]:
-            return KEYS['PageDown']
-        elif l == [27, 91, 53, 126]:
-            return KEYS['PageUp']
-        elif l == [27, 91, 51, 126]:
-            return KEYS['Delete']
-        elif l == [27, 91, 50, 126]:
-            return KEYS['Insert']
-        elif l == [127]:
-            return KEYS['Backspace']
-        elif l == [13]:
-            return KEYS['Return']
-        elif len(l) == 1:
-            return l[0]
-        elif l == [27, 79, 70]:
-            return KEYS['End']
-        elif l == [27, 79, 72]:
-            return KEYS['Home']
+        return self._codes2key(l)
 
     def refresh(self):
         spacing = '\n' * self.height * 2
