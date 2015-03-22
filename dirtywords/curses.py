@@ -48,7 +48,7 @@ class Screen(base.Screen):
             'End': curses.KEY_END,
         }
 
-        for key, curses_ch in mapping.iteritems():
+        for key, curses_ch in mapping.items():
             if ch == curses_ch:
                 return KEYS[key]
 

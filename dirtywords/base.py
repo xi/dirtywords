@@ -69,7 +69,7 @@ class AttrString(unicode):
             if attr not in defaults:
                 raise TypeError('No such attribute: %s' % attr)
 
-        for attr in defaults.iterkeys():
+        for attr in defaults.keys():
             if attr in kwargs:
                 value = kwargs[attr]
             elif isinstance(reference, AttrString):

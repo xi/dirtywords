@@ -25,7 +25,7 @@ class Screen(base.Screen):
 
     def _convert_ch(self, ch):
         # key constants
-        for key, value in KEYS.iteritems():
+        for key, value in KEYS.items():
             if ch == getattr(pygame, 'K_' + key.upper()):
                 return value
 
