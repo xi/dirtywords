@@ -10,6 +10,9 @@ setup(
     author='Tobias Bengfort',
     author_email='tobias.bengfort@posteo.de',
     packages=['dirtywords'],
+    install_requires=[
+        'six',
+    ],
     extras_require={
         'curses_core': ['curses'],
         'pygame_core': ['pygame'],

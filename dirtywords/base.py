@@ -21,16 +21,13 @@ from __future__ import absolute_import
 from time import time
 import string
 
+import six
+
 from .constants import KEYS
 
-try:
-    ustr = unicode
-except NameError:
-    ustr = str
 
-
-class AttrString(ustr):
-    """Unicode string with additional attributes.
+class AttrString(six.text_type):
+    """String with additional attributes.
 
     Rather than specifying formatting information with :py:meth:`Core.putstr`,
     it is saved with the string object itself. This way the formatting can be
@@ -97,7 +94,7 @@ class AttrString(ustr):
         return (self[i] for i in range(len(self)))
 
     def __getitem__(self, i):
-        ch = ustr.__getitem__(self, i)
+        ch = super(AttrString, self).__getitem__(i)
         return AttrString(ch, **self.get_attrs())
 
 
@@ -231,7 +228,7 @@ class Screen(Core):
                 return s.decode('utf8')
 
             elif ch < 256 and chr(ch) in string.printable:
-                return ustr(chr(ch))
+                return six.text_type(chr(ch))
 
         if blocking:
             return self.getkey(blocking=blocking)

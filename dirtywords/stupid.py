@@ -10,6 +10,8 @@ cross-platform.
 from __future__ import absolute_import
 from __future__ import print_function
 
+import six
+
 from . import base
 from .constants import KEYS
 
@@ -63,7 +65,7 @@ class Screen(base.Screen):
             '27, 91, 67': KEYS['Right'],
             '27, 91, 68': KEYS['Left'],
         }
-        key = ', '.join([str(i) for i in l])
+        key = ', '.join([six.text_type(i) for i in l])
         if key in codes:
             return codes[key]
         elif len(l) == 1:
