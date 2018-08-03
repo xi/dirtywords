@@ -93,7 +93,7 @@ class Screen(base.Screen):
 
             try:
                 self.curses_window.addstr(y, x + i, ch.encode('utf8'))
-            except:
+            except Exception:
                 pass
 
             self.curses_window.attroff(curses.A_BOLD)

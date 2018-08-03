@@ -56,6 +56,6 @@ if __name__ == '__main__':
                 elif event['type'] == 'keyup':
                     player.direction = 'stop'
             player.move()
-    except:
+    except Exception:
         scr.cleanup()
         raise

@@ -73,28 +73,28 @@ class Screen(base.Screen):
         # Convert ANSI escape sequences to key constants
         # This is implemented as a wrapper around :py:meth:`_getch` because
         # it needs to get a variable number of bytes from stdin.
-        l = [self._getch(blocking=blocking)]
+        chars = [self._getch(blocking=blocking)]
 
-        if l == [27]:
+        if chars == [27]:
             # TODO: single ESC is valid, so this should not block
-            l.append(self._getch())
-        elif l == [155]:
-            l = [27, 91]
+            chars.append(self._getch())
+        elif chars == [155]:
+            chars = [27, 91]
 
-        if l[0] == 27:
-            if l[1] == 91:
-                l.append(self._getch())
-                while l[-1] not in range(64, 127):
-                    l.append(self._getch())
-            elif l[1] == 79:
-                l.append(self._getch())
-            elif l[-1] in range(64, 96):
+        if chars[0] == 27:
+            if chars[1] == 91:
+                chars.append(self._getch())
+                while chars[-1] not in range(64, 127):
+                    chars.append(self._getch())
+            elif chars[1] == 79:
+                chars.append(self._getch())
+            elif chars[-1] in range(64, 96):
                 pass
             else:
                 # invalid?
                 pass
 
-        return self._codes2key(l)
+        return self._codes2key(chars)
 
     def refresh(self):
         spacing = '\n' * self.height * 2

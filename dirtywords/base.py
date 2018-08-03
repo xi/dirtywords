@@ -224,10 +224,10 @@ class Screen(Core):
 
             elif 127 < ch < 256:  # interpret as utf8
                 nbytes = bin(ch)[3:].find('0')
-                l = [ch]
+                chars = [ch]
                 for i in range(nbytes):
-                    l.append(self.getch())
-                s = ''.join([chr(c) for c in l])
+                    chars.append(self.getch())
+                s = ''.join([chr(c) for c in chars])
                 return s.decode('utf8')
 
             elif ch < 256 and chr(ch) in string.printable:
