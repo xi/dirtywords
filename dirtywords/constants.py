@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 KEYS = {
     'Pause': 257,  # Break key (unreliable)
     'Down': 258,  # Down-arrow
