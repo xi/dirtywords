@@ -174,7 +174,7 @@ class Screen(Core):
         now = time()
         threshold = now - 0.1
 
-        for ch, detail in self._pressed_keys.items():
+        for ch, detail in list(self._pressed_keys.items()):
             t, phase = detail
             if t < threshold:
                 del self._pressed_keys[ch]
