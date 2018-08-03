@@ -30,7 +30,7 @@ class Screen(base.Screen):
                 return value
 
         if 0 <= ch < 256:
-            if chr(ch) in string.letters:
+            if chr(ch) in string.ascii_letters:
                 # capital letters on shift
                 if pygame.key.get_mods() & pygame.KMOD_SHIFT:
                     ch ^= 32
