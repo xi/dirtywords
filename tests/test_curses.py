@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
-from .shared import unittest
-from .shared import PyKeyboard
+import unittest
+
 from . import shared_core
 
 try:
@@ -12,7 +12,6 @@ except ImportError:
 
 
 @unittest.skipIf(curses is None, 'curses not available')
-@unittest.skipIf(PyKeyboard is None, 'PyUserInput not available')
 class TestCurses(shared_core.TestCore):
     def setUp(self):
         super(TestCurses, self).setUp()

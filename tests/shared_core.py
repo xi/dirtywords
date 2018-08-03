@@ -1,10 +1,10 @@
 from __future__ import absolute_import
 
 import threading
+import unittest
 from time import sleep
 
-from .shared import unittest
-from .shared import PyKeyboard
+from pykeyboard import PyKeyboard
 
 from dirtywords.constants import KEYS
 
@@ -25,7 +25,6 @@ class KeyboardUser(threading.Thread):
             self.k.tap_key(key)
 
 
-@unittest.skipIf(PyKeyboard is None, 'PyUserInput not available')
 class TestCore(unittest.TestCase):
     def setUp(self):
         self.k = PyKeyboard()
